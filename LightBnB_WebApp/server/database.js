@@ -205,9 +205,42 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  const propertyId = Object.keys(properties).length + 1;
-  property.id = propertyId;
-  properties[propertyId] = property;
-  return Promise.resolve(property);
+
+  // get input from user
+  const inputParams = Object.entries(property);
+
+  // parameters used in query
+  const queryParams = [];
+
+  // store the nonempty column name
+  let columnName = [];
+
+  // store all the dollar sign parameters placeholder
+  let paramStr = [];
+  let i = 1;
+
+  inputParams.forEach(arr => {
+    if (arr[1]) {
+      columnName.push(arr[0]);
+      queryParams.push(arr[1]);
+      paramStr.push(`$${i++}`);
+    }
+  });
+
+  const queryStr = `
+  INSERT INTO properties
+  (${columnName.join()})
+  VALUES
+  (${paramStr.join()})
+  RETURNING *`;
+
+  console.log(queryStr, queryParams);
+  return pool.query(queryStr, queryParams)
+    .then(res => {
+      return res.rows[0];
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
 };
 exports.addProperty = addProperty;
