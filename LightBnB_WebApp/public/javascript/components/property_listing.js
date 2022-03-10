@@ -21,7 +21,7 @@ $(() => {
             <div class="property-listing__rating">${Math.round(property.average_rating * 100) / 100}/5 stars</div>
             <div class="property-listing__price">$${property.cost_per_night/100.0}/night</div>
           </footer>
-          <button id='makeReservation'>Make Reservation</button>
+          <button class='makeReservation'>Make Reservation</button>
         </section>
       </article>
     `
@@ -29,4 +29,9 @@ $(() => {
 
   window.propertyListing.createListing = createListing;
 
+  // add click event listener on button
+  $('body').on('click', '.makeReservation', function() {
+    console.log('button clicked');
+    // views_manager.show('newProperty');
+  });
 });
