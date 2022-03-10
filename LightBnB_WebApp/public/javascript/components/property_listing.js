@@ -32,6 +32,6 @@ $(() => {
   // add click event listener on button
   $('body').on('click', '.makeReservation', function() {
     console.log('button clicked');
-    // views_manager.show('newProperty');
+    views_manager.show('makeReservation');
   });
 });

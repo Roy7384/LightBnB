@@ -1,4 +1,4 @@
-.search-property-form, .login-form, .new-property-form, .sign-up-form {
+.search-property-form, .login-form, .new-property-form, .sign-up-form, .make-reservation-form{
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -17,5 +17,14 @@
   textarea, select, input, label {
     margin: 5px 5px;
     width: 100%;
+  }
+
+  .label-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  p {
+    margin: 0.4em 0em;
   }
 }
