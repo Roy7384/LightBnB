@@ -28,7 +28,7 @@ $(() => {
     const data = $(this).serialize() + `&property_id=${propertyIdToBeReserved}`;
 
     makeReservationFunc(data).then(function() {
-      console.log("make reservation post successful");
+      $('#make-reservation-form').append("<p>Reservation successful</p>");
     });
   });
 
