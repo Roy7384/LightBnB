@@ -8,10 +8,10 @@ $(() => {
         <p>End date</p>
       </div>
       <div class="make-reservation-form__field-wrapper">
-        <label for="make-reservation-form__minimum-price-per-night">Start date</label>
-        <input type="date" name="minimum_price_per_night" id="make-reservation-form__minimum-price-per-night">
-        <label for="make-reservation-form__maximum-price-per-night">End date</label>
-        <input type="date" name="maximum_price_per_night" id="make-reservation-form__maximum-price-per-night">
+        <label for="make-reservation-form__start-date">Start date</label>
+        <input type="date" name="start-date" id="make-reservation-form__start-date">
+        <label for="make-reservation-form__end-date">End date</label>
+        <input type="date" name="end-date" id="make-reservation-form__end-date">
       </div>
 
       <div class="make-reservation-form__field-wrapper">
@@ -24,11 +24,11 @@ $(() => {
 
   $makeReservationForm.on('submit', function(event) {
     event.preventDefault();
-    const data = $(this).serialize();
+    // TODO verify data here before sending
+    const data = $(this).serialize() + `&property_id=${propertyIdToBeReserved}`;
 
-    getAllListings(data).then(function( json ) {
-      propertyListings.addProperties(json.properties);
-      views_manager.show('listings');
+    makeReservationFunc(data).then(function() {
+      console.log("make reservation post successful");
     });
   });
 
