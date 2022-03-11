@@ -1,3 +1,6 @@
+// store the id of property to be reserved (globally for now, need to investigate how to avoid this)
+let propertyIdToBeReserved;
+
 $(() => {
   window.propertyListing = {};
   
@@ -21,17 +24,19 @@ $(() => {
             <div class="property-listing__rating">${Math.round(property.average_rating * 100) / 100}/5 stars</div>
             <div class="property-listing__price">$${property.cost_per_night/100.0}/night</div>
           </footer>
-          <button class='makeReservation'>Make Reservation</button>
+          <button id='${property.id}' class='makeReservation'>Make Reservation</button>
         </section>
       </article>
-    `
+    `;
   }
 
   window.propertyListing.createListing = createListing;
 
+
   // add click event listener on button
   $('body').on('click', '.makeReservation', function() {
-    console.log('button clicked');
+    propertyIdToBeReserved = this.id;
+    console.log('button clicked', propertyIdToBeReserved);
     views_manager.show('makeReservation');
   });
 });
