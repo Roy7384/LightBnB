@@ -234,3 +234,25 @@ const addProperty = function(property) {
     });
 };
 exports.addProperty = addProperty;
+
+// Make a reservation for a user
+const addReservation = function(guest_id, reservation) {
+
+  const queryParams = [...Object.values(reservation), guest_id];
+  const queryStr = `
+  INSERT INTO reservations 
+  (start_date, end_date, property_id, guest_id)
+  VALUES
+  ($1, $2, $3, $4);
+  `;
+
+  return db.query(queryStr, queryParams)
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+
+};
+exports.addReservation = addReservation;
